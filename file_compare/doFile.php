@@ -17,6 +17,7 @@ $dataOne=multi2array($dataOne,true);
 $dataTwo=multi2array($dataTwo,false);
 $caji1=array_diff($dataOne,$dataTwo);
 $caji2=array_diff($dataTwo,$dataOne);
+unset($dataOne);unset($dataTwo);
 $html1="";
 $html2="";
 if(!empty($caji1)){
@@ -29,8 +30,8 @@ if(!empty($caji2)){
         $html2.="<span class='html1 add2'>{$key}</span></br>";
     }
 }
-$aaa=json_encode(array('success'=>true,'message'=>'yes','html1'=>$html1,'count1'=>count($caji1),'html2'=>$html2,'count2'=>count($caji2)),JSON_UNESCAPED_UNICODE); //JSON_UNESCAPED_SLASHES JSON_UNESCAPED_UNICODE
-echo $aaa;
+$res=json_encode(array('success'=>true,'message'=>'yes','html1'=>$html1,'count1'=>count($caji1),'html2'=>$html2,'count2'=>count($caji2)),JSON_UNESCAPED_UNICODE); //JSON_UNESCAPED_SLASHES JSON_UNESCAPED_UNICODE
+echo $res;
 exit;
 
 function read_all_dir($dir,$filter)
@@ -70,9 +71,15 @@ function multi2array($array,$start) {
         }else if(!empty($value)){
             $basename=basename($value);
             if($start){
-                @$result_array1[str_replace($_POST['url_one'],'',$value)] = $basename.(filesize($value)?filesize($value):filesize(iconv("utf-8","gb2312",$value)));
+                if($_POST['status'])
+                    @$result_array1[str_replace($_POST['url_one'],'',$value)] = $basename.(filesize($value)?filesize($value):filesize(iconv("utf-8","gb2312",$value)));
+                else
+                    @$result_array1[str_replace($_POST['url_one'],'',$value)] = file_get_contents($value);
             }else{
-                @$result_array2[str_replace($_POST['url_two'],'',$value)] = $basename.(filesize($value)?filesize($value):filesize(iconv("utf-8","gb2312",$value)));
+                if($_POST['status'])
+                    @$result_array2[str_replace($_POST['url_two'],'',$value)] = $basename.(filesize($value)?filesize($value):filesize(iconv("utf-8","gb2312",$value)));
+                else
+                    @$result_array2[str_replace($_POST['url_two'],'',$value)] = file_get_contents($value);
             }
         }
     }

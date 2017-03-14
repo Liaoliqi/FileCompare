@@ -16,16 +16,18 @@
 <body>
 <form id='formAjax'>
 	<div class="yincan">
-		<div id='url_one'>
-			URL_ONE： <input type="text" name='url_one' style="width:800px;" value="<?php echo @$_COOKIE['fileUrl1']?$_COOKIE['fileUrl1']:'' ?>">
+		<label id='url_one'>
+			URL_ONE： <input type="text" name='url_one' style="width:58%;" value="<?php echo @$_COOKIE['fileUrl1']?$_COOKIE['fileUrl1']:'' ?>">
 			<input type="button" id="cookie1" value="保存">
+			<label><input type="radio" name="status" value="1" checked>根据文件大小</label>
+			<label><input type="radio" name="status" value="0">根据文件内容</label>
 		</div>
 		<div id='url_two'>
-			URL_TWO： <input type="text" name='url_two' style="width:800px;" value="<?php echo @$_COOKIE['fileUrl2']?$_COOKIE['fileUrl2']:'' ?>">
+			URL_TWO： <input type="text" name='url_two' style="width:58%;" value="<?php echo @$_COOKIE['fileUrl2']?$_COOKIE['fileUrl2']:'' ?>">
 			<input type="button" id="cookie2" value="保存">
 		</div>
 		<div id='filter'>
-			过滤目录：<input type="text" name='filter' style="width:800px;" value=".idea,.settings,.buildpath,.svn,data,public,服务化文档,功能设计文档">
+			过滤目录：<input type="text" name='filter' style="width:58%;" value=".idea,.settings,.buildpath,.svn,data,public,服务化文档,功能设计文档">
 			<input type="button" value="刷新" onclick="location.reload()">
 		</div>
 	</div>
